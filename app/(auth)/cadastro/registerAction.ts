@@ -4,9 +4,9 @@ import db from "@/lib/db";
 import { hashSync } from "bcrypt-ts";
 
 export default async function registerAction(
-  _prevState: any,
+  _prevState: string,
   formData: FormData
-) {
+): Promise<{ message: string; success: boolean }> {
   const entries = Array.from(formData.entries());
   const data = Object.fromEntries(entries) as {
     email: string;
