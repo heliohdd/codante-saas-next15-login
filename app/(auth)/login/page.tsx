@@ -6,8 +6,16 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import LoginForm from "./login-form";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 export default async function LoginPage() {
+  const session = await auth();
+
+  if (session) {
+    redirect("/dashboard");
+  }
+
   return (
     <>
       <Card className="max-w-sm w-full rounded-2xl mt-12">
@@ -15,6 +23,7 @@ export default async function LoginPage() {
           <h2 className="text-xl font-bold">Boas Vindas</h2>
           <CardDescription>Faça seu login com email e senha.</CardDescription>
         </CardHeader>
+
         <CardContent>
           <LoginForm />
         </CardContent>
